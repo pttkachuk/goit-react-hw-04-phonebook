@@ -1,39 +1,38 @@
-import React, { Component } from 'react'
+import { useState } from 'react'
 import { StyledBtn, StyledContactDiv, StyledContactForm, StyledInput, StyledLabel, StyledSpan } from './ContactFormStyled';
 
-export default class ContactForm extends Component {
-    state = {
-        name: '',
-        number: '',
-    };
+export default function ContactForm({onSubmit}) {
+    const [name, setName] = useState('');
+    const [number, setNumber] = useState('');
 
-    onInputChange = (event) => {
-        const { name, value } = event.target;
-        this.setState({ [name]: value });
+    const onNameChange = (event) => {
+        setName(event.target.value);
     };
-
-    handleSubmit = (event) => {
+  
+    const onNumberChange = (event) => {
+        setNumber(event.target.value);
+    };
+    
+    const handleSubmit = (event) => {
         event.preventDefault();
-        this.props.onSubmit(this.state);
-        this.reset();
-    };
+        onSubmit({ name, number });
+        reset();
+    }
 
-    reset = () => {
-        this.setState({
-            name: '',
-            number: '',
-        });
-    };
+    const reset = () => {
+        setName('');
+        setNumber('');
+    }
 
-  render() {
+  
       return (
           <StyledContactDiv>
-              <StyledContactForm onSubmit={this.handleSubmit}>
+              <StyledContactForm onSubmit={handleSubmit}>
             <StyledLabel>
                 <StyledSpan>Name</StyledSpan>
                 <StyledInput
-                    value={this.state.name}
-                    onChange={this.onInputChange}
+                    value={name}
+                    onChange={onNameChange}
                     type="text"
                     name="name"
                     placeholder="Your name..."
@@ -45,8 +44,8 @@ export default class ContactForm extends Component {
             <StyledLabel>
                 <StyledSpan>Number</StyledSpan>
                 <StyledInput
-                    value={this.state.number}
-                    onChange={this.onInputChange}
+                    value={number}
+                    onChange={onNumberChange}
                     type="tel"
                     name="number"
                     placeholder="Your number..."
@@ -60,5 +59,5 @@ export default class ContactForm extends Component {
         </StyledContactDiv>
         
     )
-  }
+  
 }
