@@ -47,20 +47,17 @@ export default function App() {
     setContacts(contacts.filter(i => i.id !== contactId));
   };
 
-
-  
-     return (
-       <StyledMainContainer>
-         <h1>Phonebook</h1>
-         <ContactForm onSubmit={handleFormSubmit} />
-         <h2>Contacts</h2>
-         <SearchBar value={filter} handleChangeFilterInput={handleChangeFilterInput}/>
-         <ContactList
-           contacts={handleFilterContacts()}
-           handleDeleteContact={handleDeleteContact}
-         />
-       </StyledMainContainer>
-      
-     )
+  return (
+    <StyledMainContainer>
+      <h1>Phonebook</h1>
+      <ContactForm onSubmit={handleFormSubmit} />
+      <h2>Contacts</h2>
+      <SearchBar value={filter} handleChangeFilterInput={handleChangeFilterInput}/>
+      <ContactList
+        contacts={handleFilterContacts()}
+        handleDeleteContact={handleDeleteContact}
+      />
+    </StyledMainContainer> 
+  )
 }
 
