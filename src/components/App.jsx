@@ -24,13 +24,18 @@ export default function App() {
 
   const handleFormSubmit = ({ number, name }) => {
     const contact = {
-     id: shortid.generate(),
-     name,
-     number,
+      id: shortid.generate(),
+      name,
+      number,
     };
-    contacts.some(i => i.name === name)
-      ? alert(`${name} is already in contacts`)
-      : setContacts([contact, ...contacts]);
+    setContacts((prevState) => {
+      if (prevState.some((i) => i.name === name)) {
+        alert(`${name} is already in contacts`);
+        return prevState;
+      } else {
+        return [contact, ...contacts];
+      }
+    });
   };
 
   const handleChangeFilterInput = (event) => {
