@@ -33,7 +33,7 @@ export default function App() {
         alert(`${name} is already in contacts`);
         return prevState;
       } else {
-        return [contact, ...contacts];
+        return [contact, ...prevState];
       }
     });
   };
@@ -49,7 +49,7 @@ export default function App() {
   };
   
   const handleDeleteContact = (contactId) => {
-    setContacts(contacts.filter(i => i.id !== contactId));
+    setContacts((prevState)=>prevState.filter(i => i.id !== contactId));
   };
 
   return (
